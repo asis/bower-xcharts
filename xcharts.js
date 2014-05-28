@@ -309,10 +309,12 @@ _scales.xy = function (self, data, xType, yType) {
     fills = container.selectAll('path.fill')
       .data(datum);
 
-    fills.enter().append('path')
-      .attr('class', 'fill')
-      .style('opacity', 0)
-      .attr('d', area.y0(y));
+    if (!self.yScale.rangeBand) {
+      fills.enter().append('path')
+        .attr('class', 'fill')
+        .style('opacity', 0)
+        .attr('d', area.y0(y));
+    }
 
     paths = container.selectAll('path.line')
       .data(datum);
